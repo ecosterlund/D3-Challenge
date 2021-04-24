@@ -8,7 +8,6 @@ var margin = {
     left: 100
   };
 
-// Defining scaleable width and height
 var width = svgWidth - margin.left - margin.right;
 var height = svgHeight - margin.top - margin.bottom;
 
@@ -23,7 +22,8 @@ var chartGroup = svg.append("g")
 
 // Import Data
 d3.csv("assets/data/data.csv").then(function(povertyData) {
-    
+  //console.log(povertyData)
+
     // Step 1: Parse Data/Cast as numbers
     // ==============================
     povertyData.forEach(function(data) {
@@ -34,7 +34,7 @@ d3.csv("assets/data/data.csv").then(function(povertyData) {
 // Step 2: Create scale functions
     // ==============================
     var xLinearScale = d3.scaleLinear()
-      .domain([0, d3.max(povertyData, d => d.poverty)])
+      .domain([8, d3.max(povertyData, d => d.poverty)])
       .range([0, width]);
 
     var yLinearScale = d3.scaleLinear()
@@ -57,9 +57,9 @@ d3.csv("assets/data/data.csv").then(function(povertyData) {
 
 // Step 5: Create Circles
     // ==============================
-    var circlesGroup = chartGroup.selectAll("text")
+    var circlesGroup = chartGroup.selectAll("circle")
     .data(povertyData)
-    .enter()
+    .enter()  
     .append("circle")
     .attr("cx", d => xLinearScale(d.poverty))
     .attr("cy", d => yLinearScale(d.healthcare))
@@ -67,7 +67,7 @@ d3.csv("assets/data/data.csv").then(function(povertyData) {
     .attr("class", "stateCircle")
     .attr("opacity", ".5");
 
-    chartGroup.selectAll("text")
+    chartGroup.selectAll("div")
     .data(povertyData)
     .enter()
     .append("text")
