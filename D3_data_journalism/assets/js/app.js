@@ -74,13 +74,13 @@ d3.csv("assets/data/data.csv").then(function(povertyData) {
     .text(function(d){
       console.log(d.abbr)
       return `${d.abbr}`;
-  })
+    })
   .attr("x", function (d) {
       return xLinearScale(d.poverty);
-  })
+    })
   .attr("y", function (d) {
       return yLinearScale(d.healthcare);
-  })
+    })
   .attr("alignment-baseline", "central")
   .attr("class", "stateText");
 
